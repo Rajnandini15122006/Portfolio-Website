@@ -33,6 +33,7 @@ export default function Home() {
   }, []);
 
   // IntersectionObserver for staggered section entrance and horizontal line expansion
+  // Using rootMargin to reveal items 80px before they reach the viewport so they are already visible when the user scrolls to them
   useEffect(() => {
     const targets = document.querySelectorAll('.reveal-on-scroll, .reveal-rule');
     if (!targets.length) return;
@@ -47,8 +48,8 @@ export default function Home() {
         });
       },
       {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.02,
+        rootMargin: '120px 0px 50px 0px',
       }
     );
 
@@ -67,9 +68,8 @@ export default function Home() {
           <hr className="border-rule reveal-rule" />
         </div>
 
-        <div className="reveal-on-scroll">
-          <FeaturedProject />
-        </div>
+        {/* Work is immediately rendered so clicking "Explore Work" or scrolling never delays */}
+        <FeaturedProject />
 
         <div className="content-wrapper">
           <hr className="border-rule reveal-rule" />
