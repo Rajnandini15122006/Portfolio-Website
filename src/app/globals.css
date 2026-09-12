@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Reset & Tokens ──────────────────────────────────────────────────── */
+
+:root {
+  --color-surface: #FAFAF8;
+  --color-surface-alt: #F2F2EF;
+  --color-surface-card: #FFFFFF;
+  --color-ink: #1A1A1A;
+  --color-ink-secondary: #5A5A58;
+  --color-ink-tertiary: #8A8A86;
+  --color-accent: #C45D3E;
+  --color-accent-hover: #B04E32;
+  --color-accent-light: #F5E6E0;
+  --color-accent-glow: rgba(196, 93, 62, 0.15);
+  --color-rule: #E5E5E3;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-image: 
+    radial-gradient(circle at 100% 0%, rgba(196, 93, 62, 0.035) 0%, transparent 45%),
+    radial-gradient(circle at 0% 50%, rgba(26, 26, 26, 0.02) 0%, transparent 35%);
+  background-attachment: fixed;
+}
+
+/* ─── Selection ────────────────────────────────────────────────────────────── */
+
+::selection {
+  background-color: var(--color-accent-light);
+  color: var(--color-ink);
+}
+
+/* ─── Focus States ─────────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Reduced Motion Support ───────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Premium Masked Typography Reveals ────────────────────────────────────── */
+
+.hero-reveal-wrap {
+  overflow: hidden;
+  display: block;
+}
+
+@keyframes maskRevealUp {
+  0% {
+    transform: translateY(115%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.animate-mask-reveal-1 {
+  animation: maskRevealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.animate-mask-reveal-2 {
+  animation: maskRevealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+.animate-mask-reveal-3 {
+  animation: maskRevealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both;
+}
+
+.animate-mask-reveal-4 {
+  animation: maskRevealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+}
+
+.animate-mask-reveal-5 {
+  animation: maskRevealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+
+.animate-mask-reveal-6 {
+  animation: maskRevealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+}
+
+/* ─── Pulsing Status Dot ────────────────────────────────────────────────────── */
+
+@keyframes activeStatusDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.65;
+  }
+}
+
+.animate-status-dot {
+  animation: activeStatusDot 2s infinite ease-in-out;
+}
+
+/* ─── Scroll Reveal Trigger Classes ────────────────────────────────────────── */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-rule {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.reveal-rule.revealed {
+  transform: scaleX(1);
+}
+
+/* ─── Hero Name Micro-Interaction ──────────────────────────────────────────── */
+
+.hero-name-link {
+  display: inline-block;
+  position: relative;
+  transition: letter-spacing 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.hero-name-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-name-link:hover {
+  letter-spacing: -0.015em;
+}
+
+.hero-name-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Technical Identity Tag Interaction ───────────────────────────────────── */
+
+.tech-tag-item {
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.tech-tag-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: var(--color-accent);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-tag-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+}
+
+.tech-tag-item:hover::after {
+  width: 100%;
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-rule);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-tertiary);
+}
+
+/* ─── Utility Classes ──────────────────────────────────────────────────────── */
+
+.section-label {
+  @apply font-mono text-label uppercase tracking-widest text-ink-tertiary;
+}
+
+.rule {
+  @apply border-t border-rule;
+}
+
+.content-wrapper {
+  @apply mx-auto max-w-content px-6 md:px-8 lg:px-12;
+}
+
+/* ─── Architecture Diagram ─────────────────────────────────────────────────── */
+
+.arch-node {
+  @apply border border-rule bg-surface px-4 py-3 font-mono text-caption text-ink;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arch-node:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-card);
+  box-shadow: 0 4px 12px rgba(196, 93, 62, 0.08);
+  transform: translateY(-2px);
+}
+
+.arch-arrow {
+  @apply text-accent/60 text-caption leading-none;
+}
